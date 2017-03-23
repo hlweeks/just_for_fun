@@ -1,7 +1,6 @@
-# setwd("/Users/hannahweeks/Documents/Vanderbilt/just_for_fun/pokemon")
-
 # source("https://bioconductor.org/biocLite.R")
 # biocLite("EBImage")
+
 # devtools::install_github("GuangchuangYu/ggimage")
 library(ggimage)
 
@@ -20,6 +19,7 @@ stats <- names(pokemon)[5:11]
 pokenames <- list.pokemon(); pokenames <- pokenames[pokenames != "riolu"]
 poke_id <- pokemon$dex[order(pokemon$Name)]
 name_id <- data.frame(name = pokenames, id = poke_id)
+# Sort by pokedex number
 name_id <- name_id[order(name_id$id),]
 
 # Modify the geom_pokemon function to pull the images from local directory for faster plot rendering
@@ -33,8 +33,4 @@ pokemon_local <- function(id) {
   paste0('emojis/', id, ".png") # Not sure why I still have to call the full expression below and not just name
 }
 
-# # Example
-# t0 <- Sys.time()
-# ggplot(pokemon, aes(HP, Speed)) + geom_pokemon_local(aes(image = paste0('emojis/', pokelabel$pokenames, '.png')))
-# tplot <- Sys.time() - t0 # About 7 seconds
 
